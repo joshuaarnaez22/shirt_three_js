@@ -1,12 +1,14 @@
 import CanvasModel from "@/components/canvas/CanvasModel";
 import Customizer from "@/components/customizer/Customizer";
 import Home from "@/components/home/Home";
+import state from "@/services/store";
 import Head from "next/head";
+import { useSnapshot } from "valtio";
+
 // import { Inter } from 'next/font/google'
-
 // const inter = Inter({ subsets: ['latin'] })
-
 export default function Main() {
+  const snap = useSnapshot(state);
   return (
     <>
       <Head>
@@ -15,9 +17,9 @@ export default function Main() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="app transition-all ease-in duration-5000">
+      <main className="app transition-all ease-in">
         <Home />
-        <CanvasModel />
+        {!snap.intro && <CanvasModel />}
         <Customizer />
       </main>
     </>
